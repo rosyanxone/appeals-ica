@@ -1,13 +1,16 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs/promises");
+const bodyParser = require("body-parser");
 const { degrees, PDFDocument, rgb, StandardFonts } = require("pdf-lib");
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/", express.static("public"));
 
-app.get("/generate", async (req, res) => {
+app.post("/generate", async (req, res) => {
   // Load the input PDF from a local file
   const inputFile = "./files/Semester-8.pdf";
   const existingPdfBytes = await fs.readFile(inputFile);
@@ -26,7 +29,7 @@ app.get("/generate", async (req, res) => {
   const { width, height } = firstPage.getSize();
 
   // Add diagonal red text to the first page
-  firstPage.drawText("x", {
+  firstPage.drawText(req.body.custom, {
     x: width / 2,
     y: height / 2,
     size: 50,

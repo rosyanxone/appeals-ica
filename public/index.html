@@ -7,20 +7,17 @@
   </head>
   <body>
     <h1>Welcome!</h1>
-    <div class="">
-      <button id="btn-generate" type="button">Generate</button>
-    </div>
+    <form method="POST" action="/generate">
+      <input type="text" name="custom" />
+      <button id="btn-generate" type="submit">Generate</button>
+    </form>
 
     <script>
       addEventListener("DOMContentLoaded", () => {
         const btnGenerate = document.getElementById("btn-generate");
 
         btnGenerate.addEventListener("click", () => {
-          fetch("/generate", {
-            method: "GET",
-          }).then(() => {
-            console.log("File generated!");
-          });
+          console.log("File generated!");
         });
       });
     </script>

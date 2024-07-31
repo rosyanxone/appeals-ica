@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome!</h1>
+    <div class="">
+      <button id="btn-generate" type="button">Generate</button>
+    </div>
+
+    <script>
+      addEventListener("DOMContentLoaded", () => {
+        const btnGenerate = document.getElementById("btn-generate");
+
+        btnGenerate.addEventListener("click", () => {
+          fetch("/generate", {
+            method: "GET",
+          }).then(() => {
+            console.log("File generated!");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
